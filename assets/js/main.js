@@ -214,4 +214,37 @@
     }
   });
 
+
+  /**
+   * Newsletter form (client-side fallback)
+   */
+  const newsletterForm = select('#newsletter-form')
+  if (newsletterForm) {
+    on('submit', '#newsletter-form', function(e) {
+      e.preventDefault()
+
+      const input = this.querySelector('input[name="email"]')
+      const message = select('#newsletter-message')
+      const email = input.value.trim()
+
+      if (!email || !input.checkValidity()) {
+        message.textContent = 'Please enter a valid email address.'
+        message.style.color = '#dc3545'
+        input.focus()
+        return
+      }
+
+      const savedEmails = JSON.parse(localStorage.getItem('newsletterEmails') || '[]')
+
+      if (!savedEmails.includes(email)) {
+        savedEmails.push(email)
+        localStorage.setItem('newsletterEmails', JSON.stringify(savedEmails))
+      }
+
+      message.textContent = 'Thanks for subscribing! We will keep you updated.'
+      message.style.color = '#198754'
+      this.reset()
+    })
+  }
+
 })()
