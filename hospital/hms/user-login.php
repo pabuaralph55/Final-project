@@ -4,13 +4,21 @@ error_reporting(0);
 include("include/config.php");
 if(isset($_POST['submit']))
 {
-$ret=mysqli_query($con,"SELECT * FROM users WHERE email='".$_POST['username']."' and password='".md5($_POST['password'])."'");
-$num=mysqli_fetch_array($ret);
-if($num>0)
+$username = trim($_POST['username']);
+$password = $_POST['password'];
+$hashedPassword = md5($password);
+
+$stmt = mysqli_prepare($con, "SELECT id, email FROM users WHERE email = ? AND password = ? LIMIT 1");
+mysqli_stmt_bind_param($stmt, "ss", $username, $hashedPassword);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$user = mysqli_fetch_assoc($result);
+
+if($user)
 {
 $extra="dashboard.php";//
-$_SESSION['login']=$_POST['username'];
-$_SESSION['id']=$num['id'];
+$_SESSION['login']=$user['email'];
+$_SESSION['id']=$user['id'];
 $host=$_SERVER['HTTP_HOST'];
 $uip=$_SERVER['REMOTE_ADDR'];
 $status=1;
@@ -23,11 +31,11 @@ exit();
 else
 {
 	// For stroing log if user login unsuccessfull
-$_SESSION['login']=$_POST['username'];	
+$_SESSION['login']=$username;	
 $uip=$_SERVER['REMOTE_ADDR'];
 $status=0;
 mysqli_query($con,"insert into userlog(username,userip,status) values('".$_SESSION['login']."','$uip','$status')");
-$_SESSION['errmsg']="Invalid username or password";
+$_SESSION['errmsg']="Invalid email or password";
 $extra="user-login.php";
 $host  = $_SERVER['HTTP_HOST'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
@@ -73,7 +81,7 @@ exit();
 							</p>
 							<div class="form-group">
 								<span class="input-icon">
-									<input type="text" class="form-control" name="username" placeholder="Username">
+									<input type="text" class="form-control" name="username" placeholder="Email">
 									<i class="fa fa-user"></i> </span>
 							</div>
 							<div class="form-group form-actions">
