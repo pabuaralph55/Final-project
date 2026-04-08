@@ -148,7 +148,7 @@
                     <div class="line h-100"></div>
                   </div>
                   <div>
-                    <h5 class="text-dark pb-5 pt-2 mx-3" style="font-size: 18px;">Look for available <a href="#">dental services</a>.</h5>
+                    <h5 class="text-dark pb-5 pt-2 mx-3" style="font-size: 18px;">Look for available <a href="hospital/hms/user-login.php">dental services</a>.</h5>
                   </div>
                 </div>
                 <div class="d-flex mb-1">
@@ -449,29 +449,30 @@
             <div class="col-lg-2 col-md-6 footer-links">
               <h4>Useful Links</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">About</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Features</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">How it works</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Dentists</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#hero" class="scrollto">Home</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#about" class="scrollto">About</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#counts" class="scrollto">Features</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#howitworks" class="scrollto">How it works</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#doctors" class="scrollto">Dentists</a></li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
               <h4 style="color: white">Our Services</h4>
               <ul>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">FAQ</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of Service</a></li>
-                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy Policy</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="#faq" class="scrollto">FAQ</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="login.html">Login / Register</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="hospital/hms/user-login.php">Book Appointment</a></li>
               </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 footer-newsletter">
               <h4>Join Our Newsletter</h4>
               <p>Be updated on the latest discount and news about Gentle Care Dental Clinic</p>
-              <form action="" method="post">
-                <input type="email" name="email" placeholder="Input email address here"><input type="submit" value="Subscribe">
+              <form id="newsletter-form" method="post" novalidate>
+                <input type="email" name="email" placeholder="Input email address here" required><input type="submit" value="Subscribe">
               </form>
+              <p id="newsletter-message" class="mt-2 mb-0" aria-live="polite"></p>
             </div>
 
           </div>
